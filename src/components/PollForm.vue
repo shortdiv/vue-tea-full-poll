@@ -101,7 +101,7 @@ export default {
       debugger;
       this.postSubmission({
         "form-name": "vue-tea-form",
-        tea: this.name
+        tea: this.name[0]
       })
         .then(() => {
           this.$router.push("thanks");

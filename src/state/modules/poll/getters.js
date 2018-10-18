@@ -1,4 +1,7 @@
 const hasSubmissions = state => {
+  if (state.submissions === null) {
+    return false;
+  }
   return Object.keys(state.submissions).length > 0;
 };
 
@@ -36,6 +39,9 @@ const submissionCounts = state => {
 };
 
 const totalSubmissionCount = state => {
+  if (state.submissions === null) {
+    return 0;
+  }
   return Object.keys(state.submissions).length;
 };
 
