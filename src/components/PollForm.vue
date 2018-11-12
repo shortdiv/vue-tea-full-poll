@@ -108,7 +108,7 @@ export default {
       debugger;
       this.postSubmission({
         "form-name": "vue-tea-form",
-        fog: this.name[0] + "Fog",
+        fog: this.name,
         tea: this.chosenTea,
         milk: this.chosenMilk
       })
