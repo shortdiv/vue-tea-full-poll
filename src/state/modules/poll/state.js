@@ -14,7 +14,7 @@ firebase.initializeApp(config);
 export const db = firebase.database();
 
 const state = {
-  submissions: {}
+  submissions: []
 };
 
 export const getState = () => cloneDeep(state);

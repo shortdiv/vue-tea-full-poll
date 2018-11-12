@@ -1,5 +1,5 @@
 const SET_SUBMISSIONS = (state, value) => {
-  state.submissions = value;
+  state.submissions.push(value);
 };
 
 export default {

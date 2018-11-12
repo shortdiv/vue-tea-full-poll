@@ -17,7 +17,7 @@ const router = new Router({
         if (Object.keys(store.state.poll.submissions).length) {
           next();
         } else {
-          await store.dispatch("poll/fetchSubmissions");
+          //await store.dispatch("poll/fetchSubmissions");
           next();
         }
       }

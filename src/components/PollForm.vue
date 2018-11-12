@@ -1,47 +1,48 @@
 <template>
-  <div id="vue">
-    <h2>What would you like for tea?</h2>
-    <form name="vue-tea-form" method="post" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit">
-      <input type="hidden" name="form-name" value="vue-tea-form" />
-      <div class="tea">
-        <h2>Tea</h2>
-        <label
-          :class="{'tea-label': true, 'checked': tea === chosenTea}"
-          v-for="tea in teaNames"
-          :key="tea">
-          <input
-          id="tea"
-          name="tea"
-          type="radio"
-          :value="tea"
-          v-model="chosenTea">
-          <span>{{ tea }}</span>
-        </label>
+  <div>
+    <h1>What would you like for tea?</h1>
+    <div id="vue">
+      <form name="vue-tea-form" method="post" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit">
+        <input type="hidden" name="form-name" value="vue-tea-form" />
+        <div class="tea">
+          <h2>Tea</h2>
+          <label
+            :class="{'tea-label': true, 'checked': tea === chosenTea}"
+            v-for="tea in teaNames"
+            :key="tea">
+            <input
+            id="tea"
+            name="tea"
+            type="radio"
+            :value="tea"
+            v-model="chosenTea">
+            <span>{{ tea }}</span>
+          </label>
+        </div>
+        <div class="milk">
+          <h2>Milk</h2>
+          <label
+            v-for="milk in milkNames"
+            :key="milk"
+            :class="{
+              'tea-label': true,
+              'checked': milk === chosenMilk,
+              'disabled': isMilkDisabled(milk)
+            }"
+            >
+            <input
+            id="milk"
+            name="milk"
+            type="radio"
+            :disabled="isMilkDisabled(milk)"
+            :value="milk"
+            v-model="chosenMilk">
+            <span>{{milk}}</span>
+          </label>
+        </div>
+        <button type="submit" class="submit-button">Order Up!</button>  
+      </form>
     </div>
-    <div class="milk">
-      <h2>Milk</h2>
-      <label
-        v-for="milk in milkNames"
-        :key="milk"
-        :class="{
-          'tea-label': true,
-          'checked': milk === chosenMilk,
-          'disabled': isMilkDisabled(milk)
-        }"
-        >
-        <input
-        id="milk"
-        name="milk"
-        type="radio"
-        :disabled="isMilkDisabled(milk)"
-        :value="milk"
-        v-model="chosenMilk">
-        <span>{{milk}}</span>
-      </label>
-  </div>
-  <div class="phone"></div>
-  <button type="submit" class="submit-button">Order Up!</button>  
-</form>
   </div>
 </template>
 
@@ -80,7 +81,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("poll", ["fetchSubmissions", "postSubmission"]),
+    ...mapActions("poll", ["postSubmission"]),
     isMilkDisabled(milk) {
       //blargh//
       const tea = this.teaTypes[this.chosenTea].filter(element =>
@@ -98,7 +99,6 @@ export default {
       return tea.length === 0;
     },
     handleSubmit() {
-      debugger;
       this.postSubmission({
         "form-name": "vue-tea-form",
         tea: this.name[0]
@@ -111,9 +111,7 @@ export default {
         });
     }
   },
-  created() {
-    this.fetchSubmissions();
-  },
+  created() {},
   computed: {
     teaNames() {
       return Object.keys(this.teaTypes);
@@ -137,7 +135,6 @@ button {
 }
 li {
   list-style: none;
-  max-width: 100px;
   margin: 0 auto;
   text-align: left;
 }
