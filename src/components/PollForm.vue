@@ -5,6 +5,11 @@
     <div id="vue">
       <form name="vue-tea-form" method="post" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit">
         <input type="hidden" name="form-name" value="vue-tea-form" />
+        <input
+            type="hidden"
+            id="fog"
+            name="fog"
+        >
         <div class="tea">
           <h2>Tea</h2>
           <label
