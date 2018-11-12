@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>What would you like for tea?</h1>
+    <p>{{ name }}</p>
     <div id="vue">
       <form name="vue-tea-form" method="post" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit">
         <input type="hidden" name="form-name" value="vue-tea-form" />
@@ -99,9 +100,12 @@ export default {
       return tea.length === 0;
     },
     handleSubmit() {
+      debugger;
       this.postSubmission({
         "form-name": "vue-tea-form",
-        tea: this.name[0]
+        fog: this.name[0] + "Fog",
+        tea: this.chosenTea,
+        milk: this.chosenMilk
       })
         .then(() => {
           this.$router.push("thanks");
@@ -123,7 +127,7 @@ export default {
       const tea = this.teaTypes[this.chosenTea].filter(element =>
         this.milkTypes[this.chosenMilk].includes(element)
       );
-      return tea;
+      return `${tea[0]} Fog`;
     }
   }
 };
@@ -146,9 +150,12 @@ span {
   font-size: 1.35em;
   font-weight: 300;
 }
-
 body {
   background-color: #3bb881;
+}
+p {
+  font-size: 2em;
+  color: black;
 }
 #vue {
   h2 {
@@ -201,9 +208,9 @@ h1 {
   text-align: center;
 }
 
-p,
-label {
-  color: #64b587;
+p {
+  text-align: center;
+  color: #fff;
   font-weight: bold;
 }
 .tea-label {
